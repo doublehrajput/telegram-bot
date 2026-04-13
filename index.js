@@ -1,7 +1,7 @@
 const TelegramBot = require("node-telegram-bot-api");
 
 const getDay = () => {
-  const date1 = new Date("2024-04-12");
+  const date1 = new Date("2026-04-12");
   const date2 = new Date();
   const diffInMs = Math.abs(date2 - date1);
   const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
