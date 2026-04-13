@@ -1,4 +1,3 @@
-const cron = require("node-cron");
 const TelegramBot = require("node-telegram-bot-api");
 
 const prompt = `Generate 5 technical interview questions (with increasing difficulty) covering the following stack and topics: React, TypeScript, Next.js, Redux/RTK, React Query, SCSS, Git, System Design, and Data Structures & Algorithms (DSA). Each question should focus on a different area from the list`;
@@ -32,11 +31,13 @@ const ADMIN_CHAT_ID = "8081795032";
 const token = "8641890777:AAE1fZ2BVAcPuh04ecrCtGmVHIqZwqKIg2s";
 const bot = new TelegramBot(token, { polling: true });
 
-cron.schedule("0 */12 * * *", async () => {
+const sendScheduledMessage = async () => {
   try {
     const result = await runDeepsinkPrompt();
     await bot.sendMessage(ADMIN_CHAT_ID, `[Scheduled]\n${result}`);
   } catch (err) {
     await bot.sendMessage(ADMIN_CHAT_ID, "Error getting scheduled response from Deepsink.");
   }
-});
+};
+
+sendScheduledMessage();
